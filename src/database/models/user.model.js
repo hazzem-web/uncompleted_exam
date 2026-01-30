@@ -22,7 +22,7 @@ export const userModel = sequelize.define('user',{
             isEmail:true
         }
     },
-    Password:{
+    password:{
         type:DataTypes.STRING,
         allowNull:false
     },

@@ -1,4 +1,4 @@
-import { DataTypes , NOW } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import { sequelize } from '../connection.js';
 import { userModel } from './user.model.js';
 import { bookModel } from './book.model.js';
@@ -8,7 +8,6 @@ export const borrowedBookModel = sequelize.define('borrowedBooks',{
         type:DataTypes.INTEGER,
         primaryKey:true,
         autoIncrement:true,
-        allowNull:false,
         field:"borrowID"
     },
     userID:{
@@ -16,7 +15,7 @@ export const borrowedBookModel = sequelize.define('borrowedBooks',{
         allowNull:false,
         references:{
             model:userModel,
-            key:"userID"
+            key:'userID'
         }
     },
     bookID:{
@@ -24,15 +23,19 @@ export const borrowedBookModel = sequelize.define('borrowedBooks',{
         allowNull:false,
         references:{
             model:bookModel,
-            key:"bookID"
+            key:'bookID'
         }
     },
     borrowDate:{
         type:DataTypes.DATE,
-        defaultValue:NOW
+        defaultValue:DataTypes.NOW
     },
     returnDate:{
         type:DataTypes.DATE,
         allowNull:true
+    },
+    status:{
+        type:DataTypes.ENUM(['borrowed','returned']),
+        defaultValue:'borrowed'
     }
 })

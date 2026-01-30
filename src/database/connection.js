@@ -25,7 +25,8 @@ export const databaseSync = async ()=> {
         const { userModel } = await import('./models/user.model.js');
         const { bookModel } = await import('./models/book.model.js');
         const { borrowedBookModel } = await import('./models/borrowedBook.model.js');
-        await sequelize.sync();
+        const { relation } = await import('./models/relation.js');
+        await sequelize.sync(/*{alter:true}*/);
         console.log("Database Synced Susccessfully");
     } catch (error) {
         console.error("Unable to sync database: ",error);

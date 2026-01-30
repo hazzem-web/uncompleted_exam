@@ -1,23 +1,29 @@
 import { borrowedBookModel } from "./borrowedBook.model.js";
 import { userModel } from "./user.model.js";
-import { bookModel } from './book.model';
+import { bookModel } from './book.model.js';
 
 userModel.hasMany(borrowedBookModel,{
-    foreignKey:"borrowID",
+    foreignKey:"userID",
     onUpdate:"CASCADE",
     onDelete:"CASCADE"
 })
 
+
+borrowedBookModel.belongsTo(userModel,{
+    foreignKey:"userID",
+    onUpdate:"CASCADE",
+    onDelete:"CASCADE"
+})
 
 bookModel.hasMany(borrowedBookModel,{
-    foreignKey:"borrowID",
+    foreignKey:"bookID",
     onUpdate:"CASCADE",
     onDelete:"CASCADE"
 })
 
 
-borrowedBookModel.belongsTo({userModel,borrowedBookModel},{
-    foreignKey:"borrowID",
+borrowedBookModel.belongsTo(bookModel,{
+    foreignKey:"bookID",
     onUpdate:"CASCADE",
     onDelete:"CASCADE"
 })
